@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Neon Nights Music Festival</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* ---------- Base Styles ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #050816;
+      color: #f9fafb;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    :root {
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.12);
+      --card-bg: rgba(15, 23, 42, 0.8);
+      --border-soft: rgba(148, 163, 184, 0.3);
+      --text-muted: #9ca3af;
+      --radius-xl: 1.5rem;
+      --radius-lg: 1rem;
+      --shadow-soft: 0 25px 50px rgba(15, 23, 42, 0.8);
+      --glass: rgba(15, 23, 42, 0.75);
+    }
+
+    /* ---------- Layout Helpers ---------- */
+    .container {
+      width: 90%;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    @media (min-width: 768px) {
+      section {
+        padding: 5rem 0;
+      }
+    }
+
+    /* ---------- Header & Navigation ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+          to bottom,
+          rgba(15, 23, 42, 0.95),
+          rgba(15, 23, 42, 0.7),
+          transparent
+        );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #f97316, #22c55e, #0ea5e9);
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.8);
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.75rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      color: #e5e7eb;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.3rem;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #f97316, #22c55e);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease,
+        background 0.18s ease, border-color 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f97316, #facc15);
+      color: #0b1120;
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.7);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 35px rgba(249, 115, 22, 0.65);
+    }
+
+    .btn-outline {
+      border-color: rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.8);
+      color: #e5e7eb;
+    }
+
+    .btn-outline:hover {
+      border-color: #f97316;
+      background: rgba(15, 23, 42, 1);
+    }
+
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+      .nav-cta {
+        display: block;
+      }
+    }
+
+    /* ---------- Hero Section ---------- */
+    .hero {
+      padding-top: 4rem;
+      padding-bottom: 4.5rem;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 55%),
+        radial-gradient(circle at top right, rgba(248, 113, 113, 0.25), transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(129, 140, 248, 0.26), transparent 55%);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        align-items: center;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.1rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      line-height: 1.15;
+      margin-bottom: 0.7rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #f97316, #facc15);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      max-width: 34rem;
+      font-size: 0.98rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .chip {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 0.78rem;
+      color: #e5e7eb;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-meta strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    /* ---------- Hero Right (Countdown + Visual) ---------- */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .countdown-card {
+      border-radius: var(--radius-xl);
+      padding: 1rem 1.2rem;
+      background: var(--glass);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(18px);
+    }
+
+    .countdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .countdown-header span {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+
+    .countdown-item {
+      padding: 0.6rem 0.4rem;
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at top, rgba(148, 163, 184, 0.35), #020617);
+      text-align: center;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .countdown-number {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .countdown-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+    }
+
+    .hero-visual {
+      margin-top: 0.6rem;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      position: relative;
+      padding: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: radial-gradient(circle at 20% 0%, rgba(248, 113, 113, 0.6), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(59, 130, 246, 0.5), transparent 65%),
+        radial-gradient(circle at 0% 100%, rgba(34, 197, 94, 0.4), transparent 55%);
+    }
+
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.35) 1px, transparent 0);
+      background-size: 18px 18px;
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .stage-tag {
+      display: inline-flex;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-visual-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-visual-sub {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+      max-width: 18rem;
+    }
+
+    .hero-visual-bottom {
+      margin-top: 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+    }
+
+    .pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 250, 252, 0.65);
+      font-size: 0.7rem;
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    .attendees {
+      font-size: 0.75rem;
+      text-align: right;
+    }
+
+    .attendees span {
+      display: block;
+      font-weight: 600;
+    }
+
+    /* ---------- Section Titles ---------- */
+    .section-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-description {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 32rem;
+      margin: 0 auto;
+    }
+
+    /* ---------- Lineup Section ---------- */
+    .lineup-grid {
+      display: grid;
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .lineup-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .artist-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .artist-card:hover {
+      transform: translateY(-4px);
+      border-color: #f97316;
+      box-shadow: 0 25px 45px rgba(15, 23, 42, 1);
+    }
+
+    .artist-image {
+      height: 140px;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, rgba(248, 113, 113, 0.9), #0f172a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .artist-image::before,
+    .artist-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: screen;
+    }
+
+    .artist-image::before {
+      background: radial-gradient(circle at 10% 0%, rgba(244, 244, 245, 0.7), transparent 55%);
+    }
+
+    .artist-image::after {
+      background: radial-gradient(circle at 90% 100%, rgba(59, 130, 246, 0.7), transparent 55%);
+    }
+
+    .artist-name {
+      font-weight: 600;
+      font-size: 1.02rem;
+    }
+
+    .artist-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .artist-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    .artist-tag {
+      font-size: 0.72rem;
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    /* ---------- Schedule Section ---------- */
+    .schedule-wrapper {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      padding: 1.4rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+
+    .schedule-tabs {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.8);
+      cursor: default;
+    }
+
+    .tab.active {
+      background: var(--accent-soft);
+      border-color: #f97316;
+      color: #fed7aa;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      min-width: 480px;
+    }
+
+    th,
+    td {
+      padding: 0.6rem 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    th {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    tbody tr:nth-child(odd) {
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .stage-pill {
+      display: inline-flex;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 0.72rem;
+    }
+
+    /* ---------- Tickets Section ---------- */
+    .tickets-grid {
+      display: grid;
+      gap: 1.2rem;
+      margin-top: 1.7rem;
+    }
+
+    @media (min-width: 900px) {
+      .tickets-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .ticket-card {
+      background: radial-gradient(circle at 20% 0%, rgba(248, 113, 113, 0.35), #020617);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ticket-card.highlight {
+      border-color: #f97316;
+      box-shadow: 0 22px 45px rgba(249, 115, 22, 0.35);
+    }
+
+    .ticket-badge {
+      position: absolute;
+      top: 0.7rem;
+      right: 0.8rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.16rem 0.5rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(248, 250, 252, 0.8);
+    }
+
+    .ticket-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .ticket-price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-top: 0.1rem;
+    }
+
+    .ticket-price span {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .ticket-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .ticket-features {
+      list-style: none;
+      font-size: 0.82rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .ticket-features li::before {
+      content: "•";
+      margin-right: 0.3rem;
+      color: #bbf7d0;
+    }
+
+    /* ---------- Info Section ---------- */
+    .info-grid {
+      display: grid;
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .info-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      padding: 1.3rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .info-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.9rem;
+    }
+
+    .info-label {
+      min-width: 70px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+    }
+
+    .info-value strong {
+      display: block;
+      font-weight: 600;
+    }
+
+    .map-placeholder {
+      height: 200px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.45), transparent 50%),
+        radial-gradient(circle at 100% 0%, rgba(249, 115, 22, 0.5), transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.55), transparent 55%),
+        #020617;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-grid-line {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+          to right,
+          rgba(15, 23, 42, 0.4) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(15, 23, 42, 0.4) 1px,
+          transparent 1px
+        );
+      background-size: 35px 35px;
+      mix-blend-mode: soft-light;
+      opacity: 0.8;
+    }
+
+    .map-pin {
+      position: absolute;
+      left: 55%;
+      top: 48%;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: #f97316;
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.9);
+      border: 2px solid #fefce8;
+    }
+
+    /* ---------- Contact Section ---------- */
+    .contact-grid {
+      display: grid;
+      gap: 1.4rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      }
+    }
+
+    form {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      padding: 1.3rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .form-control {
+      margin-bottom: 0.9rem;
+      width: 100%;
+    }
+
+    .form-control label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .form-control input,
+    .form-control textarea,
+    .form-control select {
+      width: 100%;
+      padding: 0.6rem 0.7rem;
+      border-radius: 0.8rem;
+      border: 1px solid rgba(148, 163, 184, 0.75);
+      background: rgba(15, 23, 42, 0.9);
+      color: #f9fafb;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .form-control textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-control input:focus,
+    .form-control textarea:focus,
+    .form-control select:focus {
+      border-color: #f97316;
+      box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.6);
+    }
+
+    .contact-aside {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .contact-aside strong {
+      color: #e5e7eb;
+    }
+
+    .contact-points {
+      list-style: none;
+      margin-top: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .contact-points li::before {
+      content: "★";
+      margin-right: 0.4rem;
+      color: #facc15;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 1.4rem 0 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-badge"></div>
+        <span>Neon Nights</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#lineup">Lineup</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#info">Info</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#tickets" class="btn btn-primary">Get Passes</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <!-- Left -->
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>3-Day Electronic Music Festival</span>
+          </div>
+          <h1 class="hero-title">
+            Neon Nights <span>Music Festival 2025</span>
+          </h1>
+          <p class="hero-subtitle">
+            Experience three nights of immersive electronic music, lights, and energy. 
+            Join 20,000+ fans as world-class DJs and live acts take over the Skyline Arena.
+          </p>
+
+          <div class="hero-highlights">
+            <div class="chip">December 19–21 · Skyline Arena</div>
+            <div class="chip">3 Stages · 35+ Artists</div>
+            <div class="chip">Campus Partner Event</div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#tickets" class="btn btn-primary">Book Your Pass</a>
+            <a href="#lineup" class="btn btn-outline">View Full Lineup</a>
+          </div>
+
+          <div class="hero-meta">
+            <span><strong>Headliners:</strong> AuroraX · Pulsewave · Lunar Echo</span>
+            <span><strong>Genres:</strong> EDM · House · Techno · Live Sets</span>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="hero-right">
+          <!-- Static Countdown UI (JS will make it live later) -->
+          <div class="countdown-card">
+            <div class="countdown-header">
+              <span>Festival starts in</span>
+              <span>Dec 19 · 7:00 PM</span>
+            </div>
+            <div class="countdown-grid">
+              <div class="countdown-item">
+                <div class="countdown-number">12</div>
+                <div class="countdown-label">Days</div>
+              </div>
+              <div class="countdown-item">
+                <div class="countdown-number">08</div>
+                <div class="countdown-label">Hours</div>
+              </div>
+              <div class="countdown-item">
+                <div class="countdown-number">26</div>
+                <div class="countdown-label">Min</div>
+              </div>
+              <div class="countdown-item">
+                <div class="countdown-number">45</div>
+                <div class="countdown-label">Sec</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual -->
+          <div class="hero-visual">
+            <div class="stage-tag">Skyline Main Stage</div>
+            <div class="hero-visual-title">Friday Night: AuroraX Live Set</div>
+            <p class="hero-visual-sub">
+              A full-scale audiovisual show with synchronized lasers, 3D projections, and surround sound.
+            </p>
+            <div class="hero-visual-bottom">
+              <div class="pills">
+                <span class="pill">Immersive LEDs</span>
+                <span class="pill">360° Sound</span>
+                <span class="pill">Live Vocals</span>
+              </div>
+              <div class="attendees">
+                <span>20,000+</span>
+                expected attendees
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lineup Section -->
+    <section id="lineup">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Lineup</div>
+          <h2 class="section-title">Headliners & Featured Artists</h2>
+          <p class="section-description">
+            A curated mix of international headliners and breakthrough campus talent across three stages.
+          </p>
+        </div>
+
+        <div class="lineup-grid">
+          <article class="artist-card">
+            <div class="artist-image"></div>
+            <div class="artist-name">AuroraX</div>
+            <div class="artist-meta">Future bass · Live visual show · Friday · Main Stage</div>
+            <div class="artist-tags">
+              <span class="artist-tag">Headliner</span>
+              <span class="artist-tag">Live Vocals</span>
+              <span class="artist-tag">Visual FX</span>
+            </div>
+          </article>
+
+          <article class="artist-card">
+            <div class="artist-image"></div>
+            <div class="artist-name">Pulsewave</div>
+            <div class="artist-meta">Progressive house · Saturday · Skyline Dome</div>
+            <div class="artist-tags">
+              <span class="artist-tag">EDM</span>
+              <span class="artist-tag">Campus Collab</span>
+            </div>
+          </article>
+
+          <article class="artist-card">
+            <div class="artist-image"></div>
+            <div class="artist-name">Lunar Echo</div>
+            <div class="artist-meta">Techno · Live set · Sunday · Underground Stage</div>
+            <div class="artist-tags">
+              <span class="artist-tag">Techno</span>
+              <span class="artist-tag">Analog Synths</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Schedule</div>
+          <h2 class="section-title">3 Nights · 3 Stages</h2>
+          <p class="section-description">
+            A sample of the festival timetable. In your JavaScript version, this can become interactive with filters and live updates.
+          </p>
+        </div>
+
+        <div class="schedule-wrapper">
+          <div class="schedule-tabs">
+            <span class="tab active">Friday · Dec 19</span>
+            <span class="tab">Saturday · Dec 20</span>
+            <span class="tab">Sunday · Dec 21</span>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Artist</th>
+                <th>Stage</th>
+                <th>Style</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>07:00 PM</td>
+                <td>AuroraX</td>
+                <td><span class="stage-pill">Main Stage</span></td>
+                <td>Future Bass · Live set</td>
+              </tr>
+              <tr>
+                <td>08:30 PM</td>
+                <td>Neon Drift</td>
+                <td><span class="stage-pill">Skyline Dome</span></td>
+                <td>Synthwave</td>
+              </tr>
+              <tr>
+                <td>10:00 PM</td>
+                <td>Midnight Circuit</td>
+                <td><span class="stage-pill">Underground</span></td>
+                <td>Deep Techno</td>
+              </tr>
+              <tr>
+                <td>11:30 PM</td>
+                <td>Campus All-Stars</td>
+                <td><span class="stage-pill">Main Stage</span></td>
+                <td>Collab set · Student DJs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tickets Section -->
+    <section id="tickets">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Tickets</div>
+          <h2 class="section-title">Choose Your Experience</h2>
+          <p class="section-description">
+            Simple ticket tiers designed for students. Pricing is placeholder only and can be adjusted for your presentation.
+          </p>
+        </div>
+
+        <div class="tickets-grid">
+          <article class="ticket-card">
+            <h3 class="ticket-name">Day Pass</h3>
+            <p class="ticket-price">₹999 <span>/ per day</span></p>
+            <p class="ticket-meta">Access to one festival day of your choice.</p>
+            <ul class="ticket-features">
+              <li>Entry to all stages (1 day)</li>
+              <li>Access to food court & merch</li>
+              <li>Campus shuttle access</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline">Reserve Day Pass</a>
+          </article>
+
+          <article class="ticket-card highlight">
+            <div class="ticket-badge">Most Popular</div>
+            <h3 class="ticket-name">3-Day Pass</h3>
+            <p class="ticket-price">₹2499 <span>/ full festival</span></p>
+            <p class="ticket-meta">Best value for the full 3-day experience.</p>
+            <ul class="ticket-features">
+              <li>Access to all 3 days</li>
+              <li>Priority entry lanes</li>
+              <li>Festival wristband & lanyard</li>
+              <li>Access to after-party zone</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary">Book 3-Day Pass</a>
+          </article>
+
+          <article class="ticket-card">
+            <h3 class="ticket-name">VIP Pass</h3>
+            <p class="ticket-price">₹3999 <span>/ limited</span></p>
+            <p class="ticket-meta">Exclusive access with premium viewing areas.</p>
+            <ul class="ticket-features">
+              <li>VIP viewing decks</li>
+              <li>Backstage photo wall access</li>
+              <li>Dedicated help desk</li>
+              <li>Complimentary welcome kit</li>
+            </ul>
+            <a href="#contact" class="btn btn-outline">Request VIP</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="info">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Festival Info</div>
+          <h2 class="section-title">Location & Essentials</h2>
+          <p class="section-description">
+            Use this section in your presentation to explain logistics, safety, and campus collaboration details.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-row">
+              <div class="info-label">Dates</div>
+              <div class="info-value">
+                <strong>19–21 December 2025</strong>
+                Gates open at 5:00 PM · Shows start at 7:00 PM
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Venue</div>
+              <div class="info-value">
+                <strong>Skyline Arena</strong>
+                Hosted in collaboration with the College Cultural Committee.
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Access</div>
+              <div class="info-value">
+                <strong>Students & Guests</strong>
+                Entry with valid college ID or registered guest pass.
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Note</div>
+              <div class="info-value">
+                <strong>Safety First</strong>
+                On-site medical support, secure entry checks, and separate help desks for students.
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="map-placeholder">
+              <div class="map-grid-line"></div>
+              <div class="map-pin"></div>
+            </div>
+            <p style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-muted);">
+              Placeholder map illustration. In the JavaScript version, you can embed an interactive map or 
+              use a third-party map API.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Contact</div>
+          <h2 class="section-title">Group Bookings & Queries</h2>
+          <p class="section-description">
+            This form is static for now. Later, JavaScript can add validation and submit handling.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <form>
+            <div class="form-row">
+              <div class="form-control" style="flex: 1 1 150px;">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your name" />
+              </div>
+              <div class="form-control" style="flex: 1 1 150px;">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="you@example.com" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-control" style="flex: 1 1 150px;">
+                <label for="ticket-type">Ticket Type</label>
+                <select id="ticket-type">
+                  <option>Select an option</option>
+                  <option>Day Pass</option>
+                  <option>3-Day Pass</option>
+                  <option>VIP Pass</option>
+                  <option>Campus Partner</option>
+                </select>
+              </div>
+              <div class="form-control" style="flex: 1 1 150px;">
+                <label for="group-size">Group Size</label>
+                <input type="number" id="group-size" min="1" placeholder="e.g. 4" />
+              </div>
+            </div>
+
+            <div class="form-control">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Share your query or requirements..."></textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary">
+              Send Enquiry (Demo Only)
+            </button>
+          </form>
+
+          <aside class="contact-aside">
+            <p>
+              <strong>How you can present this:</strong><br />
+              Explain that this form is currently a front-end mockup built with only HTML & CSS.
+              In the future, JavaScript will:
+            </p>
+            <ul class="contact-points">
+              <li>Validate inputs (email format, required fields, group size)</li>
+              <li>Show success/error messages dynamically</li>
+              <li>Send data to a server or Google Sheet</li>
+            </ul>
+            <p style="margin-top: 0.5rem;">
+              You can also mention how the same layout can be reused for different college events by just
+              changing text and theme colors.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2025 Neon Nights Music Festival · Concept website for college presentation</div>
+      <div class="footer-links">
+        <a href="#hero">Back to top</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

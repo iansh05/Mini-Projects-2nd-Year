@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Campus Music Fest</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #101827;
+      color: #f5f5f5;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    section {
+      padding: 32px 0;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 8px;
+    }
+
+    
+
+    header {
+      background-color: #050813;
+      border-bottom: 1px solid #1f2933;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 18px;
+      color: #f97316;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+      background-color: #1f2933;
+    }
+
+    
+
+    .btn {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 4px;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #f97316;
+      color: #111827;
+      font-weight: bold;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #f97316;
+      border: 1px solid #f97316;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    
+
+    .hero {
+      background-color: #050813;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-inner {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .hero-left {
+      flex: 2;
+    }
+
+    .hero-right {
+      flex: 1;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .hero-title span {
+      color: #f97316;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: #d1d5db;
+      margin-bottom: 10px;
+    }
+
+    .hero-info {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .hero-extra {
+      font-size: 13px;
+      color: #d1d5db;
+      margin-bottom: 12px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .count-box {
+      border: 1px solid #1f2933;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 13px;
+      background-color: #101827;
+    }
+
+    .count-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .count-grid {
+      display: flex;
+      gap: 6px;
+    }
+
+    .count-item {
+      flex: 1;
+      text-align: center;
+      background-color: #050813;
+      border-radius: 4px;
+      padding: 6px 0;
+    }
+
+    .count-number {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .count-label {
+      font-size: 10px;
+      color: #d1d5db;
+      text-transform: uppercase;
+    }
+
+    
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .section-header p {
+      font-size: 14px;
+      color: #d1d5db;
+    }
+
+    
+
+    .lineup-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 700px) {
+      .lineup-list {
+        flex-direction: row;
+      }
+    }
+
+    .artist-card {
+      flex: 1;
+      background-color: #101827;
+      border-radius: 6px;
+      border: 1px solid #1f2933;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .artist-name {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .artist-meta {
+      font-size: 13px;
+      color: #d1d5db;
+      margin-bottom: 4px;
+    }
+
+    .artist-style {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+  
+
+    .schedule-box {
+      background-color: #101827;
+      border-radius: 6px;
+      border: 1px solid #1f2933;
+      padding: 12px;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 420px;
+    }
+
+    th, td {
+      padding: 6px 4px;
+      border-bottom: 1px solid #1f2933;
+      text-align: left;
+    }
+
+    th {
+      font-size: 11px;
+      color: #9ca3af;
+      text-transform: uppercase;
+    }
+
+    
+
+    .tickets-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    @media (min-width: 700px) {
+      .tickets-grid {
+        flex-direction: row;
+      }
+    }
+
+    .ticket-card {
+      flex: 1;
+      background-color: #101827;
+      border-radius: 6px;
+      border: 1px solid #1f2933;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .ticket-price {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #f97316;
+    }
+
+    .ticket-meta {
+      font-size: 13px;
+      color: #d1d5db;
+      margin-bottom: 8px;
+    }
+
+    .ticket-card ul {
+      margin-left: 16px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .ticket-card li {
+      margin-bottom: 3px;
+    }
+
+    
+
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        flex-direction: row;
+      }
+    }
+
+    form {
+      flex: 1.3;
+      background-color: #101827;
+      border-radius: 6px;
+      border: 1px solid #1f2933;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #374151;
+      background-color: #050813;
+      color: #f5f5f5;
+      font-size: 13px;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .contact-info {
+      flex: 1;
+      font-size: 14px;
+      color: #d1d5db;
+    }
+
+    .contact-info ul {
+      margin-left: 18px;
+      margin-top: 6px;
+    }
+
+    
+
+    footer {
+      border-top: 1px solid #1f2933;
+      padding: 10px 0 18px;
+      font-size: 12px;
+      color: #9ca3af;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <header>
+    <div class="container nav">
+      <div class="logo">Campus Fest</div>
+      <nav class="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#lineup">Lineup</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <section class="hero" id="hero">
+    <div class="container hero-inner">
+      <div class="hero-left">
+        <h1 class="hero-title">
+          Campus Music Fest <span>2025</span>
+        </h1>
+        <p class="hero-subtitle">
+          Three evenings of music, dance and lights at our college ground.
+          
+        </p>
+        <p class="hero-info">
+          <strong>Date:</strong> 19 – 21 December 2025<br>
+          <strong>Venue:</strong> College Main Ground
+        </p>
+        <p class="hero-extra">
+          3 stages · 25+ performers · food stalls · safe campus event
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#tickets" class="btn">View Tickets</a>
+          <a href="#lineup" class="btn btn-outline">See Lineup</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="count-box">
+          <div class="count-title">Festival starts in </div>
+          
+          <div class="count-grid">
+            <div class="count-item">
+              <div class="count-number">12</div>
+              <div class="count-label">Days</div>
+            </div>
+            <div class="count-item">
+              <div class="count-number">04</div>
+              <div class="count-label">Hours</div>
+            </div>
+            <div class="count-item">
+              <div class="count-number">30</div>
+              <div class="count-label">Minutes</div>
+            </div>
+            <div class="count-item">
+              <div class="count-number">10</div>
+              <div class="count-label">Seconds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section id="lineup">
+    <div class="container">
+      <div class="section-header">
+        <h2>Artist Lineup</h2>
+        
+      </div>
+
+      <div class="lineup-list">
+        <div class="artist-card">
+          <div class="artist-name">DJ Aurora</div>
+          <div class="artist-meta">Main Stage · Friday · 8:00 PM</div>
+          <div class="artist-style">EDM / Dance</div>
+        </div>
+
+        <div class="artist-card">
+          <div class="artist-name">Skyline Band</div>
+          <div class="artist-meta">Acoustic Stage · Saturday · 7:30 PM</div>
+          <div class="artist-style">Indie / Rock</div>
+        </div>
+
+        <div class="artist-card">
+          <div class="artist-name">Night Beats</div>
+          <div class="artist-meta">EDM Stage · Sunday · 9:30 PM</div>
+          <div class="artist-style">House / Techno</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="schedule">
+    <div class="container">
+      <div class="section-header">
+        <h2>Schedule</h2>
+       
+      </div>
+
+      <div class="schedule-box">
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Artist</th>
+              <th>Stage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Friday</td>
+              <td>6:30 PM</td>
+              <td>College Band Jam</td>
+              <td>Main Stage</td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td>8:00 PM</td>
+              <td>DJ Aurora</td>
+              <td>Main Stage</td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td>7:30 PM</td>
+              <td>Skyline Band</td>
+              <td>Acoustic Stage</td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td>9:30 PM</td>
+              <td>Night Beats</td>
+              <td>EDM Stage</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section id="tickets">
+    <div class="container">
+      <div class="section-header">
+        <h2>Tickets</h2>
+        
+      </div>
+
+      <div class="tickets-grid">
+        <div class="ticket-card">
+          <h3>One Day Pass</h3>
+          <p class="ticket-price">₹699</p>
+          <p class="ticket-meta">Entry for any one day only.</p>
+          <ul>
+            <li>Access to all stages (1 day)</li>
+            <li>Food court access</li>
+            <li>General seating / standing</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Choose Day Pass</a>
+        </div>
+
+        <div class="ticket-card">
+          <h3>Full Festival Pass</h3>
+          <p class="ticket-price">₹1799</p>
+          <p class="ticket-meta">Best option for all three days.</p>
+          <ul>
+            <li>Access for all 3 days</li>
+            <li>Special wristband</li>
+            <li>Priority entry gate</li>
+          </ul>
+          <a href="#contact" class="btn">Choose Full Pass</a>
+        </div>
+
+        <div class="ticket-card">
+          <h3>VIP Pass</h3>
+          <p class="ticket-price">₹3199</p>
+          <p class="ticket-meta">Limited passes with extra benefits.</p>
+          <ul>
+            <li>Closer viewing area</li>
+            <li>Dedicated help desk</li>
+            <li>Free welcome kit</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">Choose VIP Pass</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Contact / Group Booking</h2>
+        <p>Form is only front-end. No real submission yet.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Enter your name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com">
+          </div>
+
+          <div class="form-group">
+            <label for="ticket">Ticket Type</label>
+            <select id="ticket">
+              <option>Select</option>
+              <option>One Day Pass</option>
+              <option>Full Festival Pass</option>
+              <option>VIP Pass</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="group">Group Size</label>
+            <input id="group" type="number" min="1" placeholder="e.g. 4">
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message / Doubts</label>
+            <textarea id="message" placeholder="Write your query here..."></textarea>
+          </div>
+
+          <button type="button" class="btn">Send</button>
+        </form>
+
+        <div class="contact-info">
+          <p><strong>In future updates:</strong></p>
+          <ul>
+            
+            <li>Form does not send data yet.</li>
+            <li>In future, using js i can:
+              <ul>
+                <li>Check if all fields are filled,</li>
+                <li>Validate email format,</li>
+                <li>Show success / error messages.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <footer>
+    <div class="container">
+      © 2025 Campus Music Fest · 
+    </div>
+  </footer>
+
+</body>
+</html>
